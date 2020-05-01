@@ -77,4 +77,13 @@ export default App;
 
 - 지금 작성된 App.js 파일처럼 작성해도 되긴 하지만 모든 컴포넌트마다 이렇게 작성해 줄 수는 없기 때문에 다음 강의에서 더 멋진 방법 소개함.
 
-## 5
+## 5 Error Boundaries with Higher Order Components
+
+- 4 강에서처럼 에러가 발생할 컴포넌트마다 하나씩 작업해주고 싶지 않음.
+- 그래서 higher-order component를 만듦 -> HOC
+
+- HOC를 통해 내가 원하는 모든 컴포넌트를 보호할 수 있음.
+
+- 해당 영상 강의 나중에 다시 참고하셈.
+
+## 6 this setStatenull

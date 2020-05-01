@@ -1,68 +1,80 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Master React16
 
-## Available Scripts
+Nomad Academy course to master all the new features of React 16
 
-In the project directory, you can run:
+## 2 Return Types Strings and Fragments
 
-### `yarn start`
+```
+class ReturnTypes extends Component {
+  render() {
+    return (
+      <Fragment> or <>
+        <header></header>
+        <div></div>
+        <footer></footer>
+      </Fragment> or </>
+    );
+  }
+}
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- react 16 부터는 컴포넌트를 return할때 array나 span으로 감싸지 않고 Fragment로 감싸거나 <></>로 감싸서 한번에 2개 이상의 컴포넌트를 리턴해줄 수 있게 됨.
+- 또한 return String 이 가능함.
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## 3 Portals
 
-### `yarn test`
+- index.html에서 보면 알다싶이 ReactJS는 하나의 div를 찾아서 마운트를 해줌.
+- Portals는 index.html에 있는 `<div id="root"></div>`이란 React root 밖에 리액트를 넣을 수 있도록 해줌
+- Portals는 리액트가 아니라 리액트 돔 안에 있음.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Portals 사용법
+  1. index.html에 `<div id="root"></div>` 의 밖에 컴포넌트를 만들고 id값을 준다.
+  2. App.js에서 `document.getElementById("touchme")` 로 리액트 밖에 만들어 뒀던 컴포넌트의 id값을 가져온다.
 
-### `yarn build`
+```
+import React, { Component, Fragment } from "react";
+import { createPortal } from "react-dom";
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+class Portals extends Component {
+  render() {
+    return createPortal(<Message />, document.getElementById("touchme"));
+  }
+}
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+const Message = () => "Just Touch This!";
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+class ReturnTypes extends Component {
+  render() {
+    return "안녕, 씨발럼아";
+  }
+}
 
-### `yarn eject`
+class App extends Component {
+  render() {
+    return (
+      <Fragment>
+        <ReturnTypes />
+        <Portals />
+      </Fragment>
+    );
+  }
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+export default App;
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<b>리액트 루트 밖에서 렌더를 할 때 사용할 수 있는 것. 그래서 포털이라고 불리는 것.</b>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 4 Error Boundaries
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- 컴포넌트로 하여금 컴포넌트 칠드런의 에러를 관리할 수 있게 해주는 것.
+- App의 경우에서 보면은 ReturnTypes나 Portals에서 에러가 발생하면 App에서 관리를 할 수 있음
+- 중요한건 이게 정상 작동할 때는 칠드런의 에러에만 한정이다.
 
-## Learn More
+- 에러가 발생한 부분만 따로 구분하고 관리할 수 있다는 개념인듯.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- componentDidCatch 사용한 것. 이 강의에서는 개념만 알려줌. 나중에 이거에대해 알고싶다면 해당 강의를 한번 더 보는게 나을듯 함.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 지금 작성된 App.js 파일처럼 작성해도 되긴 하지만 모든 컴포넌트마다 이렇게 작성해 줄 수는 없기 때문에 다음 강의에서 더 멋진 방법 소개함.
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## 5
